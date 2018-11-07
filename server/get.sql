@@ -1,0 +1,11 @@
+-- #---GET STATEMENTS----#
+-- #get character with most likes
+-- #get character's game
+-- #order characters DESC based on their chronological release date
+-- #get character's franchise
+-- #get character's moves!
+-- #get character's certain move (from list in moves)
+-- #order characters based on their tier, display name
+-- #get comments made about certain character (ask for char) display char and comment
+-- #check if user with same username or password is in the system
+
