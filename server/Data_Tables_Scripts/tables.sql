@@ -11,7 +11,6 @@ CREATE TABLE User
 
 CREATE TABLE Voting
 (
-    l_userID INT(4) NOT NULL,
     l_charID INT(4) NOT NULL,
     l_like INT NOT NULL,
     l_dislike INT NOT NULL
@@ -63,4 +62,13 @@ CREATE TABLE joinCandG
     j_joinID INTEGER PRIMARY KEY,
     j_charID INT(4) NOT NULL,
     j_gameID INT(4) NOT NULL
+);
+
+CREATE TABLE joinVandU
+(
+    jvu_joinID INTEGER PRIMARY KEY,
+    jvu_charID INT(4) NOT NULL,
+    jvu_userID INT(4) NOT NULL,
+    jvu_like INT(1) NOT NULL,
+    jvu_dislike INT(1) NOT NULL
 );
