@@ -19,7 +19,6 @@ def exit():
 #delete user (enter username)
 #delete character (delete everything to do with character in it)
 #update userName (have to enter password)
-#update SETTINGS
 def updateState():
     userInput = 0
     while(True):
