@@ -28,11 +28,14 @@ class navBar extends Component {
                         </Menu.Item>
                     </Link>
                     
-                    <Menu.Item>
-                        <span className = "navFont">Log In</span>
-                    </Menu.Item>
-                    
-                    </Menu.Menu>
+                    <Link to = "/">
+                        <Menu.Item>
+                            <span className = "navFont">Log In</span>
+                        </Menu.Item>
+                    </Link>
+                   
+                   </Menu.Menu>
+                   
                 </Menu>
             </React.Fragment>
           );

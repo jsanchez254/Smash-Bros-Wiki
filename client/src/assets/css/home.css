@@ -3,3 +3,18 @@
     height: 500px;
     border: 2px black solid;
 }
+
+.character{
+    background-color: #262626;
+    width: 200px;
+    height: 100px;
+    color: white;
+    font-size: 25px;
+    border: black 3px solid;
+    text-align: center;
+}
+
+.character:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
