@@ -8,46 +8,46 @@ class logIn extends Component {
     render() { 
         return (
             <React.Fragment>
-                <section class = "hero is-dark is-fullheight">
-                    <div class  ="hero-body"> 
-                        <div class = "container">
-                            <div class = "columns is-centered">
-                                <div class = "column is-5-tablet is-3-desktop is-3-widescreen">
-                                    <form class="box">
-                                        <div class="field has-text-centered">
+                <section className = "hero is-dark is-fullheight">
+                    <div className  ="hero-body"> 
+                        <div className = "container">
+                            <div className = "columns is-centered">
+                                <div className = "column is-5-tablet is-3-desktop is-3-widescreen">
+                                    <form className="box">
+                                        <div className="field has-text-centered">
                                             <img src= {logo} width="167"/>
                                         </div>
                                         
-                                        <div class = "field ">
-                                            <label class = "label"> Email </label>
-                                                <div class = "control has-icons-left">
-                                                    <input class = "input" type = "email" placeholder = "EMAIL PORFAVOR!"/>
-                                                        <span class = "icon is-small is-left">
-                                                            <i class="fas fa-envelope"></i>
+                                        <div className = "field ">
+                                            <label className = "label"> Email </label>
+                                                <div className = "control has-icons-left">
+                                                    <input className = "input" type = "email" placeholder = "EMAIL PORFAVOR!"/>
+                                                        <span className = "icon is-small is-left">
+                                                            <i className="fas fa-envelope"></i>
                                                         </span>
                                                 </div>
                                         </div>
                                         
-                                        <div class = "field ">
-                                            <label class = "label"> Password </label>
-                                                <div class = "control has-icons-left">
-                                                    <input class = "input" type = "email" placeholder = "PASSWORD PORFAVOR!"/>
-                                                        <span class = "icon is-small is-left">
-                                                            <i class="fas fa-lock"></i>
+                                        <div className = "field ">
+                                            <label className = "label"> Password </label>
+                                                <div className = "control has-icons-left">
+                                                    <input className = "input" type = "email" placeholder = "PASSWORD PORFAVOR!"/>
+                                                        <span className = "icon is-small is-left">
+                                                            <i className="fas fa-lock"></i>
                                                         </span>
                                                 </div>
                                         </div>
                                         
-                                        <div class = "field">
-                                            <label class = "checkbox">
+                                        <div className = "field">
+                                            <label className = "checkbox">
                                                 <input type = "checkbox"/>
                                                     REMEMBA ME!
                                             </label>
                                         </div>
                                         
-                                        <div class = "field">
+                                        <div className = "field">
                                         <Link to = "/home">
-                                            <button class = "button is-success">
+                                            <button className = "button is-success">
                                                 Login
                                             </button>
                                         </Link>

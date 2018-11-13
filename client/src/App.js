@@ -31,6 +31,7 @@ import smashLogo from "./assets/img/smashBros.jpg";
 
 //IMPORT CSS
 import "./assets/css/home.css";
+import "./assets/css/characters.css";
 
 class App extends Component {
   render() {

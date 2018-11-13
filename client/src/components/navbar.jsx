@@ -17,10 +17,6 @@ class navBar extends Component {
                             <span className = "navFont">Home</span>
                         </Menu.Item>
                     </Link>
-                         
-                    <Menu.Item>
-                        <span className = "navFont">Character</span>
-                    </Menu.Item>
                     
                     <Link to = "/timeline">
                         <Menu.Item>

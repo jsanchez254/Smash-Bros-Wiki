@@ -1,11 +1,110 @@
 import React, { Component } from 'react';
+import axios from "axios";
+
+//import semantic ui
+import {Button} from "semantic-ui-react";
+
+//IMPORT IMAGE
+import ike from "../assets/img/Character_Pics/Ike_SSBU.png";
+
+//IMPORT COMMENTBOX
+import WriteComment from "../components/writeComment";
 
 class Ike extends Component {
-    state = {  }
+    state = {
+        content: "",
+        moves: [],
+        newMoves: [],
+        tier: "",
+        class1: ""
+      }
+      
+      componentDidMount(){
+            axios.get("http://localhost:5000/Ike")
+                .then(res => {
+                    const content = res.data;
+                    this.setState({content})
+                })
+            
+            axios.get("http://localhost:5000/Ike/moves")
+                .then(res => {
+                    const moves = res.data;
+                    const newMoves = moves[0];
+                    this.setState({moves});
+                    this.setState({newMoves});
+                })
+            
+            axios.get("http://localhost:5000/Ike/tier")
+                .then(res => {
+                    const tier = res.data;
+                    this.setState({tier});
+                })
+            
+            axios.get("http://localhost:5000/Ike/class")
+                .then(res => {
+                    const class1 = res.data;
+                    this.setState({class1});
+                })
+      }
     render() { 
         return (
             <React.Fragment>
-                <h1>Hello I am Ike</h1>
+                <div className = "columns">
+                    <div className = "column is-5">
+                        <div className = "charImg">
+                            <img src = {ike}/>
+                        </div>
+                        <div className = "columns">
+                            <div className = "column is-4">
+                                <Button
+                                color = "blue"
+                                content = ""
+                                icon = "thumbs up"
+                                label = {{basic: true, color: "blue", pointing: "left", content: "2000"}}
+                                />
+                            </div>
+                            <div className = "column is-4 is-offset-1">
+                                <Button
+                                color = "red"
+                                content = ""
+                                icon = "thumbs down"
+                                label = {{basic: true, color: "red", pointing: "left", content: "1"}}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className = "column is-5 is-offset-1">
+                        <h1 className = "title">Ike</h1>
+                        <div>
+                            {this.state.content}
+                        </div>
+                        
+                        <br/>
+                        <center> <h1 className = "title">Tier:</h1> </center>
+                            <div className = "tier">{this.state.tier}</div>
+                        <br/>
+                        <center><h1 className = "title">Class:</h1></center>
+                            <div className = "class1">{this.state.class1}</div>
+                        <br/>
+                        <h1 className = "title">Moves:</h1>
+                        <table className = "table">
+                            <thead>
+                                <tr>
+                                    <th>Ultimate</th>
+                                    <th>Side Smash</th>
+                                    <th>B-Attack</th>
+                                    <th>Recovery</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {this.state.newMoves.map((move, index) => <td key = {index}> {move} </td>)}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <WriteComment/>
             </React.Fragment>
           );
     }

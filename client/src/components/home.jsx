@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-import smashLogo from "../assets/img/smashBros.jpg";
 import Characters from "./characters";
 
 class home extends Component {
