@@ -16,7 +16,9 @@ class Ike extends Component {
         moves: [],
         newMoves: [],
         tier: "",
-        class1: ""
+        class1: "",
+        dislike: "",
+        like: ""
       }
       
       componentDidMount(){
@@ -45,6 +47,19 @@ class Ike extends Component {
                     const class1 = res.data;
                     this.setState({class1});
                 })
+            
+            axios.get("http://localhost:5000/Ike/like")
+                .then(res => {
+                    const like = res.data;
+                    this.setState({like});
+                })
+
+            axios.get("http://localhost:5000/Ike/dislike")
+            .then(res => {
+                const dislike = res.data;
+                this.setState({dislike});
+            })
+
       }
     render() { 
         return (
@@ -60,7 +75,7 @@ class Ike extends Component {
                                 color = "blue"
                                 content = ""
                                 icon = "thumbs up"
-                                label = {{basic: true, color: "blue", pointing: "left", content: "2000"}}
+                                label = {{basic: true, color: "blue", pointing: "left", content: this.state.like}}
                                 />
                             </div>
                             <div className = "column is-4 is-offset-1">
@@ -68,7 +83,7 @@ class Ike extends Component {
                                 color = "red"
                                 content = ""
                                 icon = "thumbs down"
-                                label = {{basic: true, color: "red", pointing: "left", content: "1"}}
+                                label = {{basic: true, color: "red", pointing: "left", content: this.state.dislike}}
                                 />
                             </div>
                         </div>
@@ -104,7 +119,7 @@ class Ike extends Component {
                         </table>
                     </div>
                 </div>
-                <WriteComment/>
+                <WriteComment character = "ike"/>
             </React.Fragment>
           );
     }

@@ -5,6 +5,14 @@ select distinct c_name, l_like from Character, joinVandU, Voting  where
  c_charID = jvu_charID and l_charID = jvu_charID group by c_name 
  having l_like = (select max(l_like) from Voting);
 
+ --get characters likes
+ select distinct l_like from Character, joinVandU, Voting  where
+ c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Ike";
+
+--get character's dislikes
+  select distinct l_dislike from Character, joinVandU, Voting  where
+ c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Ike";
+
 -- 2 #get character with most dislikes
 select distinct c_name, l_dislike from Character, joinVandU, Voting  where
  c_charID = jvu_charID and l_charID = jvu_charID group by c_name 
