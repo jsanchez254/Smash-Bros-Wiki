@@ -52,7 +52,7 @@ class writeComment extends Component {
             </form>
              
             <Divider/>
-            <LoadComm/>
+            <LoadComm character = {this.props.character}/>
         </React.Fragment>
         );
     }

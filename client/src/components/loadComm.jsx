@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
+import axios from "axios";
+
+import LoadCommDef from './loadCommentDefinitive';
 
 class loadComm extends Component {
-    state = {  }
+    state = {
+        usersComments: []
+      }
+
+      componentDidMount(){
+        if(this.props.character == "Toon Link")
+            axios.get("http://localhost:5000/Toon_Link/comments")
+                .then(res => {
+                    const usersComments = res.data;
+                    console.log(usersComments);
+                    this.setState({usersComments});
+                })
+        else if(this.props.character == "Ike")
+        axios.get("http://localhost:5000/Ike/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
+
+      }
+
     render() { 
         return (  
             <React.Fragment>
-                <div className="media-content">
-                    <div className="content">
-                    <p>
-                    <strong>Sean Brown</strong>
-                    <br/>
-                        blah
-                    <br/>
-            
-                    </p>
-                    </div>
-                </div>
+                {this.state.usersComments.map((user, index) => <LoadCommDef userName = {user[0]} 
+                    comment = {user[1]}/> )}
             </React.Fragment>
         );
     }

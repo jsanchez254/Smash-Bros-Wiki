@@ -119,7 +119,7 @@ class Ike extends Component {
                         </table>
                     </div>
                 </div>
-                <WriteComment character = "ike"/>
+                <WriteComment character = "Ike"/>
             </React.Fragment>
           );
     }

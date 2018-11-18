@@ -119,6 +119,19 @@ def ikedislike():
         store = json.dumps(store)
         return store
 
+@app.route("/Ike/comments")
+def IkeComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Ike";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------TOON LINK------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
 @app.route('/Toon_Link')
@@ -196,6 +209,19 @@ def Toon_Linkdislike():
         cursor  = connect.cursor()
         query = '''select distinct l_dislike from Character, joinVandU, Voting  where
                 c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Toon Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Toon_Link/comments")
+def Toon_LinkComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Lucina";'''
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
