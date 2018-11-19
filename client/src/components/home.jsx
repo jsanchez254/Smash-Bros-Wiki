@@ -21,7 +21,7 @@ class home extends Component {
                 <div>
                     {/*<img className = "image" src = {smashLogo}/>*/}
                     <div className = "columns is-multiline">
-                        { this.state.msg.map(msg => <Characters character = {msg}/>)}
+                        { this.state.msg.map((msg, index) => <Characters key = {index} character = {msg}/>)}
                     </div>
                 </div>
                 

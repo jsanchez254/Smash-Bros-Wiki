@@ -27,6 +27,21 @@ def register():
                 return "wow"
         return "I was a post"
 
+
+@app.route("/logIn", methods = ["GET", "POST"])
+def logIn():
+        if request.method == "POST":
+                info = request.data
+                parse = json.loads(info)
+                info = parse["user"]
+                print info
+                # userName = info["userName"]
+                # password = info["password"]
+                # print "UserName: ", userName
+                # print "Password: ", password
+                return "cool"
+        return "LOG IN!!"
+
 @app.route('/')
 def index():
         #connect to SMASH database
