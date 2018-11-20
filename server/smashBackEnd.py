@@ -27,20 +27,35 @@ def register():
                 return "wow"
         return "I was a post"
 
-
+#LOG IN LOGIC!!
 @app.route("/logIn", methods = ["GET", "POST"])
 def logIn():
         if request.method == "POST":
                 info = request.data
                 parse = json.loads(info)
                 info = parse["user"]
-                print info
-                # userName = info["userName"]
-                # password = info["password"]
-                # print "UserName: ", userName
-                # print "Password: ", password
-                return "cool"
-        return "LOG IN!!"
+                userName = info["userName"]
+                password = info["password"]
+                valid = checkValid(userName, password)
+                return valid
+
+def checkValid(userName, password):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT u_userName from User WHERE u_email = ''' +  "'" + userName + "'" + '''
+                AND u_userName = ''' + "'" +  password + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        try:
+                test = store[0][0]
+        except IndexError:
+                test = "null1"
+        if test == "null":
+                return test
+        else:
+                return test
 
 @app.route('/')
 def index():

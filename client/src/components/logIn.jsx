@@ -3,16 +3,22 @@ import { Link } from 'react-router-dom';
 import axios from "axios"
 //import logo
 import logo from "../assets/img/smashLogo.png";
+//IMPORT ICONS 
+import { Icon } from 'semantic-ui-react'
+
+//IMPORT NAVBAR
+import Navbar from "./navbar"; 
+
 
 class logIn extends Component {
     state = {
         userName: "",
-        password: ""
+        password: "",
+        stado: ""
       };
 
     handleChange = (event) => {
-        console.log(this);
-        this.setState({userName: event.target.value});
+        this.setState({[event.target.name]: event.target.value});
 
     }
 
@@ -26,8 +32,8 @@ class logIn extends Component {
 
         axios.post("http://localhost:5000/logIn", {user})
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            const stado= res.data;
+            this.setState({stado});
         })
     }
 
@@ -36,6 +42,7 @@ class logIn extends Component {
             <React.Fragment>
                     <section className = "hero is-dark is-fullheight">
                         <div className  ="hero-body"> 
+                        {this.state.stado}
                             <div className = "container">
                                 <div className = "columns is-centered">
                                     <div className = "column is-5-tablet is-3-desktop is-3-widescreen">
@@ -47,11 +54,11 @@ class logIn extends Component {
                                             <div className = "field ">
                                                 <label className = "label"> Email </label>
                                                     <div className = "control has-icons-left">
-                                                        <input name = "email" className = "input" type = "email"
+                                                        <input name = "userName" className = "input" type = "email"
                                                         onChange = {this.handleChange
                                                         } placeholder = "EMAIL PORFAVOR!"/>
                                                             <span className = "icon is-small is-left">
-                                                                <i className="fas fa-envelope"></i>
+                                                            <Icon name ="mail"/>
                                                             </span>
                                                     </div>
                                             </div>
@@ -62,7 +69,7 @@ class logIn extends Component {
                                                         <input name = "password" className = "input" type = "password"
                                                         onChange = {this.handleChange} placeholder = "PASSWORD PORFAVOR!"/>
                                                             <span className = "icon is-small is-left">
-                                                                <i className="fas fa-lock"></i>
+                                                                <Icon name ="lock"/>
                                                             </span>
                                                     </div>
                                             </div>
@@ -75,11 +82,11 @@ class logIn extends Component {
                                             </div>
                                             
                                             <div className = "field">
-                                            <Link to = "/home">
+                                            {/* <Link to = "/home"> */}
                                                 <button type = "submit" value = "Submit" className = "button is-success">
                                                     Login
                                                 </button>
-                                            </Link>
+                                            {/* </Link> */}
                                             </div>
                                         </form>
                                     </div>
