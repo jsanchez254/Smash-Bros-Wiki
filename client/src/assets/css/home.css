@@ -18,3 +18,11 @@
     opacity: 0.5;
     cursor: pointer;
 }
+
+.incorrect{
+    color: red;
+}
+
+.navFont{
+    font-size: 20px;
+}

@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from "axios"
 //import logo
 import logo from "../assets/img/smashLogo.png";
-//IMPORT ICONS 
-import { Icon } from 'semantic-ui-react'
 
-//IMPORT NAVBAR
-import Navbar from "./navbar"; 
 
 
 class logIn extends Component {
     state = {
         userName: "",
         password: "",
-        stado: ""
+        usuario: "1",
+        linkone: "/"
       };
 
     handleChange = (event) => {
@@ -32,17 +29,29 @@ class logIn extends Component {
 
         axios.post("http://localhost:5000/logIn", {user})
         .then(res => {
-            const stado= res.data;
-            this.setState({stado});
+            const usuario = res.data;
+            this.setState({usuario});
         })
     }
 
+    handlePass = () =>{
+        console.log(this.state.usuario);
+        if(this.state.usuario == "null1" || this.state.usuario == "1" ){
+            if(this.state.usuario == "null1"){
+                return (<h1 className = "incorrect">Password or Email is incorrect, try again.</h1>)
+            }
+            return;
+        }
+        else{
+            this.setState({linkone: "/home"})
+            return (<Redirect to = "/home"/>)
+        }
+    }
     render() { 
         return (
             <React.Fragment>
                     <section className = "hero is-dark is-fullheight">
                         <div className  ="hero-body"> 
-                        {this.state.stado}
                             <div className = "container">
                                 <div className = "columns is-centered">
                                     <div className = "column is-5-tablet is-3-desktop is-3-widescreen">
@@ -56,9 +65,9 @@ class logIn extends Component {
                                                     <div className = "control has-icons-left">
                                                         <input name = "userName" className = "input" type = "email"
                                                         onChange = {this.handleChange
-                                                        } placeholder = "EMAIL PORFAVOR!"/>
+                                                        } placeholder = "Enter Email"/>
                                                             <span className = "icon is-small is-left">
-                                                            <Icon name ="mail"/>
+                                                                <i className="fas fa-envelope"></i>
                                                             </span>
                                                     </div>
                                             </div>
@@ -67,26 +76,22 @@ class logIn extends Component {
                                                 <label className = "label"> Password </label>
                                                     <div className = "control has-icons-left">
                                                         <input name = "password" className = "input" type = "password"
-                                                        onChange = {this.handleChange} placeholder = "PASSWORD PORFAVOR!"/>
+                                                        onChange = {this.handleChange} placeholder = "Enter Password"/>
                                                             <span className = "icon is-small is-left">
-                                                                <Icon name ="lock"/>
+                                                                <i className="fas fa-lock"></i>
                                                             </span>
                                                     </div>
                                             </div>
                                             
-                                            <div className = "field">
-                                                <label className = "checkbox">
-                                                    <input type = "checkbox"/>
-                                                        REMEMBA ME!
-                                                </label>
-                                            </div>
+                                         
                                             
                                             <div className = "field">
-                                            {/* <Link to = "/home"> */}
-                                                <button type = "submit" value = "Submit" className = "button is-success">
+                                            {/* <Link to = {this.state.linkone}> */}
+                                                <button onClick={this.handleSubmit}   type = "submit" value = "Submit" className = "button is-success">
                                                     Login
                                                 </button>
-                                            {/* </Link> */}
+                                                {this.handlePass()}
+                                            {/* </Link>  */}
                                             </div>
                                         </form>
                                     </div>

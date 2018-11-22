@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route, Redirect
 } from 'react-router-dom';
 
 //IMPORT SEMANTIC UI
@@ -39,7 +39,10 @@ class App extends Component {
       <Router>
           <div className="App">
                 <Route exact path = "/" component = {LogIn}/>
-                <Navbar/>
+                <Route path={["/home", "/timeline", "/Lucina",
+                 "/Bayonetta", "/Snake", "/Samus", "/Falco", "/Fox", "/Ike",
+                 "/Link","/Toon Link", "/Young Link", "/Piranha Plant" ]} 
+                component = {Navbar}/>
                 <Container>
                   <Route path = "/home" component = {Home}/>
                   <Route path = "/timeline" component = {Timeline}/>

@@ -26,7 +26,7 @@ class Toon extends Component {
                 const content = res.data;
                 this.setState({content})
             })
-        
+
         axios.get("http://localhost:5000/Toon_Link/moves")
             .then(res => {
                 const moves = res.data;

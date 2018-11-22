@@ -15,7 +15,7 @@ connect = sql.connect("smash.db")
 cursor  = connect.cursor()
 
 
-@app.route('/register', methods = ["GET", "POST"])
+@app.route('/blog', methods = ["GET", "POST"])
 def register():
         if request.method == "POST":
                 # comment = request.form.get("comment", False)
@@ -23,10 +23,50 @@ def register():
                 parse = json.loads(comment)
                 parse1 = parse["blog"]
                 comment = parse1["comment"]
-                print comment
+                character = parse1["character"]
+                userName = parse1["userName"]
+                # print character
+                # print comment
+                # print userName
+                charID = getCharacterId(character)
+                userID = getUserId(userName)
+                # print charID
+                # print userID
+                insertComment(comment, charID, userID)
                 return "wow"
         return "I was a post"
 
+def getCharacterId(character):
+          #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_charID from Character WHERE c_name = ''' +  "'" + character + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+def getUserId(userName):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT u_userID from User WHERE u_userName = ''' +  "'" + userName + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+def insertComment(comment, charID, userID):
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''INSERT INTO commSect (cs_userID, cs_charID, cs_comment)
+                   VALUES (''' + str(userID) + "," + str(charID) + "," + "'" + comment + "'" + ''') ;'''
+        cursor.execute(query)
+        connect.commit()
+
+valid = "HELLO"
 #LOG IN LOGIC!!
 @app.route("/logIn", methods = ["GET", "POST"])
 def logIn():
@@ -34,9 +74,14 @@ def logIn():
                 info = request.data
                 parse = json.loads(info)
                 info = parse["user"]
+                print info
                 userName = info["userName"]
                 password = info["password"]
+                global valid
                 valid = checkValid(userName, password)
+                print valid
+                return valid
+        if request.method == "GET":
                 return valid
 
 def checkValid(userName, password):
@@ -251,10 +296,11 @@ def Toon_LinkComments():
         #control database
         cursor  = connect.cursor()
         query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
-                 and c_charID = cs_charID and c_name = "Lucina";'''
+                 and c_charID = cs_charID and c_name = "Toon Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
+        print store
         return store
 
 

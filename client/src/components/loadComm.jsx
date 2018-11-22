@@ -29,7 +29,7 @@ class loadComm extends Component {
     render() { 
         return (  
             <React.Fragment>
-                {this.state.usersComments.map((user, index) => <LoadCommDef userName = {user[0]} 
+                {this.state.usersComments.map((user, index) => <LoadCommDef key = {index} userName = {user[0]} 
                     comment = {user[1]}/> )}
             </React.Fragment>
         );

@@ -6,7 +6,16 @@ import { Divider } from 'semantic-ui-react'
 
 class writeComment extends Component {
     state = { 
-        comment: ""
+        comment: "",
+        userName: ""
+     }
+
+     componentDidMount(){
+        axios.get("http://localhost:5000/logIn")
+        .then(res => {
+            const userName = res.data;
+            this.setState({userName});
+        })
      }
 
      handleChange = (event) => {
@@ -17,15 +26,20 @@ class writeComment extends Component {
          event.preventDefault();
 
          const blog ={
-             comment: this.state.comment
+             comment: this.state.comment,
+             character: this.props.character,
+             userName: this.state.userName
          };
 
-     axios.post("http://localhost:5000/register", {blog})
+     axios.post("http://localhost:5000/blog", {blog})
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+          
         })
         console.log(blog.comment);
+    }
+
+    loadComments(){
+        return (<LoadComm character = {this.props.character}/>);
     }
 
     render() { 
@@ -50,9 +64,8 @@ class writeComment extends Component {
                 </div>
             </article>
             </form>
-             
             <Divider/>
-            <LoadComm character = {this.props.character}/>
+            {this.loadComments()}
         </React.Fragment>
         );
     }
