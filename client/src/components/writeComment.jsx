@@ -39,6 +39,7 @@ class writeComment extends Component {
     }
 
     loadComments(){
+        console.log(this.props.character)
         return (<LoadComm character = {this.props.character}/>);
     }
 

@@ -23,6 +23,13 @@ class loadComm extends Component {
                 console.log(usersComments);
                 this.setState({usersComments});
             })
+        else if(this.props.character == "Bayonetta")
+        axios.get("http://localhost:5000/Bayonetta/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
 
       }
 

@@ -25,13 +25,13 @@ def register():
                 comment = parse1["comment"]
                 character = parse1["character"]
                 userName = parse1["userName"]
-                # print character
-                # print comment
-                # print userName
+                print character
+                print comment
+                print userName
                 charID = getCharacterId(character)
                 userID = getUserId(userName)
-                # print charID
-                # print userID
+                print charID
+                print userID
                 insertComment(comment, charID, userID)
                 return "wow"
         return "I was a post"
@@ -297,6 +297,101 @@ def Toon_LinkComments():
         cursor  = connect.cursor()
         query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Toon Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------BAYONETTA------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Bayonetta')
+def Bayonettadesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Bayonetta"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/moves")
+def BayonettaMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Bayonetta";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/tier")
+def BayonettaTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Bayonetta";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/class")
+def BayonettaClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Bayonetta";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/like")
+def BayonettaLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Bayonetta";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/dislike")
+def Bayonettadislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Bayonetta";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/comments")
+def BayonettaComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Bayonetta";'''
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
