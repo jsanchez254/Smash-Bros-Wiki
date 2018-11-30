@@ -83,15 +83,28 @@ class logIn extends Component {
                                                     </div>
                                             </div>
                                             
-                                         
-                                            
+                                        
                                             <div className = "field">
-                                            {/* <Link to = {this.state.linkone}> */}
-                                                <button onClick={this.handleSubmit}   type = "submit" value = "Submit" className = "button is-success">
-                                                    Login
-                                                </button>
+                                                <div className = "columns">
+                                                        <div className = "column is-5">
+                                                            {/* <Link to = {this.state.linkone}> */}
+                                                                <button onClick={this.handleSubmit}   type = "submit" value = "Submit" className = "button is-success">
+                                                                    Login
+                                                                </button>
+                                                                
+                                                            {/* </Link>  */}
+                                                        </div>
+                                                        <div className = "column is-3">
+                                                            <Link to = "/createAccount">
+                                                                <button className = "button is-info">Create Account...</button>
+                                                            </Link>
+                                                        </div>
+                                                </div>
                                                 {this.handlePass()}
-                                            {/* </Link>  */}
+                                            </div>
+
+                                             <div>
+                                                
                                             </div>
                                         </form>
                                     </div>
