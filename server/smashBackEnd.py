@@ -779,5 +779,385 @@ def FoxComments():
         print store
         return store
 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Link------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Link')
+def Linkdesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/moves")
+def LinkMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/tier")
+def LinkTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/class")
+def LinkClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/like")
+def LinkLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/dislike")
+def Linkdislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/comments")
+def LinkComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Lucina------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Lucina')
+def Lucinadesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Lucina"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/moves")
+def LucinaMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/tier")
+def LucinaTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/class")
+def LucinaClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/like")
+def LucinaLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/dislike")
+def Lucinadislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/comments")
+def LucinaComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Lucina";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Piranha_Plant------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Piranha_Plant')
+def Piranha_Plantdesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Piranha Plant"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/moves")
+def Piranha_PlantMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/tier")
+def Piranha_PlantTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/class")
+def Piranha_PlantClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/like")
+def Piranha_PlantLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/dislike")
+def Piranha_Plantdislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/comments")
+def Piranha_PlantComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Piranha Plant";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Young LINK------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Young_Link')
+def Young_Linkdesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Young Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/moves")
+def Young_LinkMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/tier")
+def Young_LinkTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/class")
+def Young_LinkClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/like")
+def Young_LinkLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/dislike")
+def Young_Linkdislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/comments")
+def Young_LinkComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Young Link";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
 if __name__ == '__main__':
         app.run(debug =True)
