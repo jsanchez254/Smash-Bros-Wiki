@@ -12,6 +12,7 @@ import LogIn from "./components/logIn";
 import Navbar from "./components/navbar";
 import Timeline from "./components/timeline";
 import Home from "./components/home";
+import CreateAccount from "./components/createAccount";
 
 //IMPORT CHARACTERS
 import Lucina from "./characters/Lucina";
@@ -46,6 +47,7 @@ class App extends Component {
                 <Container>
                   <Route path = "/home" component = {Home}/>
                   <Route path = "/timeline" component = {Timeline}/>
+                  <Route path = "/createAccount" component = {CreateAccount}/>                  
                   {/*CHARACTER ROUTES*/}
                   <Route path = "/Lucina" component = {Lucina}/>
                   <Route path = "/Bayonetta" component = {Bayonetta}/>
