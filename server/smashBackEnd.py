@@ -15,6 +15,37 @@ connect = sql.connect("smash.db")
 cursor  = connect.cursor()
 
 
+#check if admin
+@app.route("/admin", methods = ["GET", "POST"])
+def checkAdmin():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check)
+                parse1 = parse["user"]
+                userName = parse1["userName"]
+
+                print userName
+
+                #connect to SMASH database
+                connect = sql.connect("smash.db")
+                #control database
+                cursor  = connect.cursor()
+                query = ''' SELECT u_admin FROM User
+                        WHERE  u_userName = ''' + "'" + userName + "'" + ''';'''
+                cursor.execute(query)
+                store = cursor.fetchall()
+                print "PRINT THIS SHIIIIT"
+                hello = store[0][0]
+                print hello
+
+                if(hello == 1):
+                        return "true"
+                else:
+                        return "false"
+                
+        return "wow"
+
+
 #UPDATE LIKES AND DISLIKES
 @app.route("/updateLikes", methods = ["GET", "POST"])
 def updateLikes():
