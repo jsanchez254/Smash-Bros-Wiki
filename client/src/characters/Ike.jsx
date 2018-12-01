@@ -61,6 +61,17 @@ class Ike extends Component {
             })
 
       }
+
+      Handlelike = () =>{
+        const like = +this.state.like + 1;
+        this.setState({like});
+      }
+
+      HandleDislike = () =>{
+        const dislike = +this.state.dislike - 1;
+        this.setState({dislike});
+     }
+
     render() { 
         return (
             <React.Fragment>
@@ -71,15 +82,15 @@ class Ike extends Component {
                         </div>
                         <div className = "columns">
                             <div className = "column is-4">
-                                <Button
+                                <Button onClick = {this.Handlelike}
                                 color = "blue"
                                 content = ""
                                 icon = "thumbs up"
-                                label = {{basic: true, color: "blue", pointing: "left", content: this.state.like}}
+                                label = {{basic: true, color: "blue", pointing: "left", content: +this.state.like}}
                                 />
                             </div>
                             <div className = "column is-4 is-offset-1">
-                                <Button
+                                <Button onClick = {this.HandleDislike}
                                 color = "red"
                                 content = ""
                                 icon = "thumbs down"
