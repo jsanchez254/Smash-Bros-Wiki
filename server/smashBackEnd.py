@@ -16,6 +16,69 @@ cursor  = connect.cursor()
 
 
 
+#CHECK LIKE STATUS
+@app.route("/checkLikeStatus", methods = ["GET", "POST"])
+def checkLikeStatus():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check)
+                print check
+                parse1 = parse["check"]
+                userName = parse1["userName"]
+                character = parse1["character"]
+
+                userID = getUserId(userName)
+                charID = getCharacterId(character)
+
+                print userID
+                print charID
+                checko = checkStatus(userID, charID)
+                print checko
+
+                return "cool beans"
+        return "cool2"
+
+def checkStatus(userID, charID):
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = ''' SELECT jvu_charID FROM joinVandU
+                WHERE  jvu_charID = ''' + str(charID) + ''' AND
+                jvu_userID = ''' + str (userID)   + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+
+        try:
+                test = store[0][0]
+        except IndexError:
+                return "false"
+
+        return "true"
+
+def getCharacterId(character):
+          #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_charID from Character WHERE c_name = ''' +  "'" + character + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+def getUserId(userName):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT u_userID from User WHERE u_userName = ''' +  "'" + userName + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+#--------------------------------------------------------------------------------------------#
+
+#CREATE A USER!!!
 @app.route("/createUser", methods = ["GET", "POST"])
 def createUser():
         print "cool"

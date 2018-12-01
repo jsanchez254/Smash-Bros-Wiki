@@ -18,10 +18,20 @@ class Ike extends Component {
         tier: "",
         class1: "",
         dislike: "",
-        like: ""
+        like: "",
+        letLike: true,
+        userName: ""
       }
       
       componentDidMount(){
+            axios.get("http://localhost:5000/logIn")
+            .then(res => {
+                const userName = res.data;
+                this.setState({userName});
+                console.log(res.data);
+            })
+
+
             axios.get("http://localhost:5000/Ike")
                 .then(res => {
                     const content = res.data;
@@ -59,22 +69,50 @@ class Ike extends Component {
                 const dislike = res.data;
                 this.setState({dislike});
             })
-
       }
 
       Handlelike = () =>{
-        const like = +this.state.like + 1;
-        this.setState({like});
+        if(this.HandleCheckLikeStatus()){
+            const like = +this.state.like + 1;
+            this.setState({like});
+        }
       }
 
       HandleDislike = () =>{
-        const dislike = +this.state.dislike - 1;
-        this.setState({dislike});
+        if(this.HandleCheckLikeStatus()){
+            const dislike = +this.state.dislike - 1;
+            this.setState({dislike});
+        }
+     }
+
+     //makes sure that user cannot like or dislike something twice
+     HandleCheckLikeStatus = () =>{
+        const check= {
+            userName: this.state.userName,
+            character: "Ike"
+        };
+
+        var checko = "";
+
+        axios.post("http://localhost:5000/checkLikeStatus", {check})
+        .then(res =>{
+            checko = res.data;
+            console.log(checko)
+        })
+
+        if(checko == "true"){
+            return true;
+        }
+
+        else{
+            return false;
+        }
      }
 
     render() { 
         return (
             <React.Fragment>
+                {this.props.userName}
                 <div className = "columns">
                     <div className = "column is-5">
                         <div className = "charImg">

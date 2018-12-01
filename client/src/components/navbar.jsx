@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from "axios"
 
 import { Icon } from 'semantic-ui-react';
 
 class navBar extends Component {
     state = { 
-        userName: ""
+        userName: " "
      }
     componentDidMount(){
         axios.get("http://localhost:5000/logIn")
@@ -17,9 +17,16 @@ class navBar extends Component {
             })
      }
 
+     handleUser(){
+         if(this.state.userName == "HELLO"){
+            return (<Redirect to = "/"/>)
+         }
+     }
+
     render() { 
         return (
             <React.Fragment>
+                {this.handleUser()}
                 <nav className = "navbar is-primary">
                     <div className = "navbar-end">
                 
