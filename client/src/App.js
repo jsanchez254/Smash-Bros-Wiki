@@ -26,6 +26,10 @@ import Link from "./characters/Link";
 import Toon from "./characters/Toon_Link";
 import Young from "./characters/Young_Link";
 import Plant from "./characters/Piranha_Plant";
+import Corrin from "./characters/corrin";
+import Cloud from "./characters/cloud";
+import Megaman from "./characters/Megaman";
+import Greninja from "./characters/Greninja";
 
 //IMPORT IMAGES
 import smashLogo from "./assets/img/smashBros.jpg";
@@ -42,7 +46,8 @@ class App extends Component {
                 <Route exact path = "/" component = {LogIn}/>
                 <Route path={["/home", "/timeline", "/Lucina",
                  "/Bayonetta", "/Snake", "/Samus", "/Falco", "/Fox", "/Ike",
-                 "/Link","/Toon Link", "/Young Link", "/Piranha Plant" ]} 
+                 "/Link","/Toon Link", "/Young Link", "/Piranha Plant", "/Mega man",
+                 "/Corrin", "/Cloud", "/Greninja" ]} 
                 component = {Navbar}/>
                 <Container>
                   <Route path = "/home" component = {Home}/>
@@ -60,6 +65,10 @@ class App extends Component {
                   <Route path = "/Toon Link" component = {Toon}/>
                   <Route path = "/Young Link" component = {Young}/>
                   <Route path = "/Piranha Plant" component = {Plant}/>
+                  <Route path = "/Mega man" component = {Megaman}/>
+                  <Route path = "/Corrin" component = {Corrin}/>
+                  <Route path = "/Cloud" component = {Cloud}/>
+                  <Route path = "/Greninja" component = {Greninja}/>
                 </Container>
           </div>
       </Router>
