@@ -15,6 +15,69 @@ connect = sql.connect("smash.db")
 cursor  = connect.cursor()
 
 
+#UPDATE LIKES AND DISLIKES
+@app.route("/updateLikes", methods = ["GET", "POST"])
+def updateLikes():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check)
+                print check
+                parse1 = parse["check"]
+                userName = parse1["userName"]
+                character = parse1["character"]
+                like = parse1["like"]
+                dislike = parse1["dislike"]
+
+                print userName
+                print character
+                print like
+                print dislike
+
+                userID = getUserId(userName)
+                charID = getCharacterId(character)
+
+                insertLike(userID,  charID, like, dislike)
+
+                return "arikado"
+
+def insertLike(userName, character, like, dislike):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO joinVandU (jvu_charID, jvu_userID, jvu_like, jvu_dislike)
+                        VALUES (?,?,?,?)''' , (userName, character, like, dislike))
+        connect.commit()
+
+        # -- WILL BE 1 IN DISLIKE OR 1 IN LIKE, DEPENDING ON ACTION, PYTHON WILL TAKE
+        # -- CARE OF SPECIFICS
+        query = '''UPDATE Voting
+        SET l_like = (l_like + ''' + str(like) + ''' ), l_dislike = (l_dislike + ''' + str(dislike) + ''')
+        where l_charID =''' +  str(character) + ''';'''
+
+        cursor.execute(query)
+        connect.commit()
+
+def getCharacterId(character):
+          #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_charID from Character WHERE c_name = ''' +  "'" + character + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+def getUserId(userName):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT u_userID from User WHERE u_userName = ''' +  "'" + userName + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
 
 #CHECK LIKE STATUS
 @app.route("/checkLikeStatus", methods = ["GET", "POST"])
@@ -33,9 +96,8 @@ def checkLikeStatus():
                 print userID
                 print charID
                 checko = checkStatus(userID, charID)
-                print checko
-
-                return "cool beans"
+        
+                return  checko
         return "cool2"
 
 def checkStatus(userID, charID):

@@ -19,8 +19,9 @@ class Ike extends Component {
         class1: "",
         dislike: "",
         like: "",
-        letLike: true,
-        userName: ""
+        letLike: false,
+        userName: "",
+        whatLike: true
       }
       
       componentDidMount(){
@@ -28,7 +29,6 @@ class Ike extends Component {
             .then(res => {
                 const userName = res.data;
                 this.setState({userName});
-                console.log(res.data);
             })
 
 
@@ -71,48 +71,84 @@ class Ike extends Component {
             })
       }
 
-      Handlelike = () =>{
-        if(this.HandleCheckLikeStatus()){
-            const like = +this.state.like + 1;
-            this.setState({like});
-        }
-      }
+      HandleLike = () =>{
+        setTimeout(() => {
+            if(!this.state.letLike){
+                const like = +this.state.like + 1;
+                const whatLike = true;
+                this.setState({whatLike});
+                this.setState({like}); 
+                this.HandleUpdateOfLikes();
+            }
+        }, 350);
+    }
+      
 
       HandleDislike = () =>{
-        if(this.HandleCheckLikeStatus()){
-            const dislike = +this.state.dislike - 1;
-            this.setState({dislike});
+        setTimeout(() => {
+            if(!this.state.letLike){
+                const dislike = +this.state.dislike + 1;
+                const whatLike = false;
+                this.setState({whatLike});
+                this.setState({dislike}); 
+                this.HandleUpdateOfLikes();
+            }
+        }, 350);
+    }
+     
+
+    HandleUpdateOfLikes = () =>{
+        var check;
+        if(this.state.whatLike){
+            check= {
+                userName: this.state.userName,
+                character: "Ike",
+                like: 1,
+                dislike: 0
+            };
         }
-     }
+        else{
+            check= {
+                userName: this.state.userName,
+                character: "Ike",
+                like: 0,
+                dislike: 1
+            };
+        }
+        axios.post("http://localhost:5000/updateLikes", {check})
+            .then(res => {
+                console.log(res.data);
+            })
+    }
 
      //makes sure that user cannot like or dislike something twice
-     HandleCheckLikeStatus = () =>{
+     HandleCheckLikeStatus = (funcion) =>{
         const check= {
             userName: this.state.userName,
             character: "Ike"
         };
 
-        var checko = "";
-
         axios.post("http://localhost:5000/checkLikeStatus", {check})
         .then(res =>{
-            checko = res.data;
-            console.log(checko)
+            const letLike = res.data;
+            this.setState({letLike})
         })
 
-        if(checko == "true"){
-            return true;
+        if(funcion == "dislike"){
+            this.HandleDislike();
         }
 
         else{
-            return false;
+            this.HandleLike();
+           
         }
+
      }
+
 
     render() { 
         return (
             <React.Fragment>
-                {this.props.userName}
                 <div className = "columns">
                     <div className = "column is-5">
                         <div className = "charImg">
@@ -120,7 +156,7 @@ class Ike extends Component {
                         </div>
                         <div className = "columns">
                             <div className = "column is-4">
-                                <Button onClick = {this.Handlelike}
+                                <Button onClick = {() => this.HandleCheckLikeStatus("like")}
                                 color = "blue"
                                 content = ""
                                 icon = "thumbs up"
@@ -128,7 +164,7 @@ class Ike extends Component {
                                 />
                             </div>
                             <div className = "column is-4 is-offset-1">
-                                <Button onClick = {this.HandleDislike}
+                                <Button onClick = {() => this.HandleCheckLikeStatus("dislike")}
                                 color = "red"
                                 content = ""
                                 icon = "thumbs down"
