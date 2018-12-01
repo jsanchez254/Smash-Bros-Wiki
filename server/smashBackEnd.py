@@ -15,6 +15,44 @@ connect = sql.connect("smash.db")
 cursor  = connect.cursor()
 
 
+
+@app.route("/createUser", methods = ["GET", "POST"])
+def createUser():
+        print "cool"
+        if request.method == "POST":
+                user = request.data
+                parse = json.loads(user)
+                parse1 = parse["newUser"]
+                userName = parse1["userName"]
+                password = parse1["password"]
+                main = parse1["main"]
+                email = parse1["email"]
+                name = parse1["name"]
+                lname = parse1["lname"]
+
+                # print(userName)
+                # print(name)
+                # print(lname)
+                # print(password)
+                # print(main)
+                # print(email)
+                
+                insertUser(userName, password, main, email, name, lname)
+
+                return "cool"
+        return "okay"
+def insertUser(userName, password, main, email, name, lname):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO User (u_firstName, u_lastName, u_email, u_userName, u_admin, u_main)
+                        VALUES (?,?,?,?,?,?)''' , (name, lname, email, userName,  0, main))
+        connect.commit()
+
+
+
+
 @app.route('/blog', methods = ["GET", "POST"])
 def register():
         if request.method == "POST":

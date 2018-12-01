@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { Link} from 'react-router-dom';
+
+//IMPORT SEMANTIC UI
+import { Icon } from 'semantic-ui-react'
+
 //IMPORT AXIOS
 import axios from "axios";
 
@@ -13,24 +18,44 @@ class createAccount extends Component {
         main: "",
         email:"",
         name:"",
-        lname: ""
+        lname: "",
+        characters: [],
+        realCharacter: "realCharacter"
      }
 
-     handleChange(event){
+     componentDidMount(){
+        axios.get("http://localhost:5000/")
+            .then(res => {
+                const characters = res.data;
+                console.log("hello");
+                this.setState({characters});
+                console.log(this.state.characters[0]);
+            })
+    }
+
+     handleChange = (event) =>{
         this.setState({[event.target.name]: event.target.value});
+        //takes care of updating main character option!
+        if(event.target.name == ""){
+            event.target.name = "realCharacter";
+            this.setState({[event.target.name]: event.target.value});
+        }
      }
 
-     handleSubmit(){
+     handleSubmit = (event) =>{
+        event.preventDefault();
         const newUser= {
             userName : this.state.userName,
             password : this.state.password,
-            main: this.state.main,
-            email: this.state.email
+            main: this.state.realCharacter,
+            email: this.state.email,
+            name: this.state.name,
+            lname: this.state.lname
 
         }
-        axios.post("http://localhost:5000/", {newUser})
+        axios.post("http://localhost:5000/createUser", {newUser})
             .then(res => {
-                
+                console.log(res.data)
             })
 
      }
@@ -38,6 +63,9 @@ class createAccount extends Component {
         return (
             <React.Fragment>
                <section className = "hero is-dark is-fullheight">
+                    <Link to = "/">
+                        <button className = "button is-warning"><Icon name = "arrow alternate circle left"/>&nbsp;&nbsp;Back To Log In</button>
+                    </Link>
                         <div className  ="hero-body"> 
                             <div className = "container">
                                 <div className = "columns is-centered">
@@ -74,10 +102,64 @@ class createAccount extends Component {
                                                         </div>
                                                     </div>
                                                     
-                                                    
-                                                    
-
                                                 </div>
+                                            </div>
+                                                        
+                                            <div className = "field ">
+                                                <label className = "label"> User Name: </label>
+                                                    <div className = "control has-icons-left">
+                                                        <input name = "userName" className = "input"
+                                                        onChange = {this.handleChange
+                                                        } placeholder = "Enter User Name"/>
+                                                            <span className = "icon is-small is-left">
+                                                                <i className="fas fa-envelope"></i>
+                                                            </span>
+                                                    </div>
+                                            </div>
+
+                                            <div className = "field ">
+                                                <label className = "label"> Email: </label>
+                                                    <div className = "control has-icons-left">
+                                                        <input name = "email" className = "input" type = "email"
+                                                        onChange = {this.handleChange
+                                                        } placeholder = "Enter Email"/>
+                                                            <span className = "icon is-small is-left">
+                                                                <i className="fas fa-envelope"></i>
+                                                            </span>
+                                                    </div>
+                                            </div>
+
+                                            <div className = "field ">
+                                                <label className = "label"> Password: </label>
+                                                    <div className = "control has-icons-left">
+                                                        <input name = "password" className = "input" type = "email"
+                                                        onChange = {this.handleChange
+                                                        } placeholder = "Enter Email"/>
+                                                            <span className = "icon is-small is-left">
+                                                                <i className="fas fa-envelope"></i>
+                                                            </span>
+                                                    </div>
+                                            </div>
+                                            {/* {this.state.realCharacter}                     */}
+                                            <div className  ="field">
+                                                
+                                                <div className = "select">
+                                                        <select onChange = {this.handleChange}>
+                                                            <option>Who Is Your Main?</option>
+                                                            { this.state.characters.map((msg, index) => 
+                                                                <option name = "realCharacter" value = {msg[0]} key = {index}>
+                                                                    {msg}
+                                                                </option>
+                                                            )}
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className = "field">
+                                                <button onClick={this.handleSubmit}   type = "submit" value = "Submit" 
+                                                className = "button is-success">
+                                                    SUBMIT
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
