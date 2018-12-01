@@ -1638,7 +1638,100 @@ def CorrinComments():
         print store
         return store
 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Cloud------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route('/Cloud')
+def Clouddesc():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "SELECT c_desc from Character WHERE c_name = "'"Cloud"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
 
+@app.route("/Cloud/moves")
+def CloudMoves():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT m_ultimate, m_sideSmash, m_bAttack, m_recovery 
+                FROM Character, Moves where m_charID = c_CharID
+                AND c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/tier")
+def CloudTier():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_tier
+                FROM Character where
+                 c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/class")
+def CloudClass():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_class
+                FROM Character where
+                 c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/like")
+def CloudLike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_like from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/dislike")
+def Clouddislike():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
+                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/comments")
+def CloudComments():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+                 and c_charID = cs_charID and c_name = "Cloud";'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
 
 if __name__ == '__main__':
         app.run(debug =True)
