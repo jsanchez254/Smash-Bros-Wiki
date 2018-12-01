@@ -20,9 +20,7 @@ class navBar extends Component {
 
         setTimeout(this.handleUser(), 500)
      }
-
-
-
+     
      handleUser = () =>{
          if(this.state.userName == "HELLO"){
             return (<Redirect to = "/"/>)
@@ -52,7 +50,6 @@ class navBar extends Component {
             }
         }
      
-
     navBarAdmin = ()=>{
         if(this.state.isAdmin){
             return "navbar is-danger";
