@@ -20,6 +20,7 @@ class CreateCharacter extends Component {
       handleChange = (event) =>{
         this.setState({[event.target.name]: event.target.value});
         console.log(event.target.value);
+        console.log(event.target.name);
       }
 
 
@@ -69,10 +70,10 @@ class CreateCharacter extends Component {
                                                        
                                                         <label className = "label">Select Tier:</label>
                                                         <div className = "select">
-                                                            <select onChange = {this.handleChange}>
+                                                            <select name = "realTier" onChange = {this.handleChange}>
                                                                 <option>Select Tier</option>
                                                                 { this.state.tier.map((msg, index) => 
-                                                                    <option name = "realCharacter" value = {msg[0]} key = {index}>
+                                                                    <option value = {msg[0]} key = {index}>
                                                                         {msg}
                                                                     </option>
                                                                 )}
@@ -85,10 +86,10 @@ class CreateCharacter extends Component {
                                                        
                                                        <label className = "label">Select Class:</label>
                                                        <div className = "select">
-                                                           <select onChange = {this.handleChange}>
+                                                           <select name = "realClass" onChange = {this.handleChange}>
                                                                <option>Select Class</option>
                                                                { this.state.class.map((msg, index) => 
-                                                                   <option name = "realCharacter" value = {msg} key = {index}>
+                                                                   <option value = {msg} key = {index}>
                                                                        {msg}
                                                                    </option>
                                                                )}
