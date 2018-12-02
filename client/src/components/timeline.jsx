@@ -5,7 +5,7 @@ class timeline extends Component {
     render() { 
         return (
             <React.Fragment>
-                <h1>HELLO TIMELINE</h1>
+                <center><div className = "divider1"></div></center>
             </React.Fragment>
           );
     }

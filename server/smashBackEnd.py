@@ -14,6 +14,54 @@ connect = sql.connect("smash.db")
 #control database
 cursor  = connect.cursor()
 
+#create character
+@app.route("/createCharacter",  methods = ["GET", "POST"] )
+def createCharacter():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check) 
+                parse1 = parse["newChar"]
+                
+                tier = parse1["tier"]
+                description = parse1["description"]
+                name = parse1["name"]
+                class1 = parse1["class"]
+                
+                insertNewCharacter(name, tier, class1, description)
+                charID = getCharacterId(name)
+                insertLikeSystem (charID)
+
+                return "it works"
+        return "cool"
+
+def insertNewCharacter(name, tier, class1, description):
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO Character (c_name, c_tier, c_class, c_desc)
+                        VALUES (?,?,?,?)''' , (name, tier, class1, description))
+        connect.commit()
+
+def getCharacterId(character):
+          #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''SELECT c_charID from Character WHERE c_name = ''' +  "'" + character + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+def insertLikeSystem(charID):
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO Voting (l_charID, l_like, l_dislike)
+                        VALUES (?,?,?)''' , (charID, 0, 0))
+        connect.commit()
+
 
 #check if admin
 @app.route("/admin", methods = ["GET", "POST"])
@@ -58,11 +106,6 @@ def updateLikes():
                 character = parse1["character"]
                 like = parse1["like"]
                 dislike = parse1["dislike"]
-
-                print userName
-                print character
-                print like
-                print dislike
 
                 userID = getUserId(userName)
                 charID = getCharacterId(character)

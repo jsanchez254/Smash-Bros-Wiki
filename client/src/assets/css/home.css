@@ -26,3 +26,11 @@
 .navFont{
     font-size: 20px;
 }
+
+/* DIVIDER */
+.divider1{
+    height: 1000px;
+    background-color: black;
+    width: 30px;
+    border: inset white 3px;
+}

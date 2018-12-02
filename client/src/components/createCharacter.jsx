@@ -14,7 +14,9 @@ class CreateCharacter extends Component {
         name:"",
         tier: ["S", "A", "B", "C", "D", "E" ,"F"],
         class: ["Heavy", "Projectile", "Melee", "Swordsman"],
-        description: ""
+        description: "",
+        realTier: "",
+        realClass: ""
       }
 
       handleChange = (event) =>{
@@ -28,8 +30,8 @@ class CreateCharacter extends Component {
         event.preventDefault();
         const newChar= {
             name : this.state.name,
-            tier : this.state.tier,
-            class: this.state.class,
+            tier : this.state.realTier,
+            class: this.state.realClass,
             description: this.state.description
         }
         axios.post("http://localhost:5000/createCharacter", {newChar})
