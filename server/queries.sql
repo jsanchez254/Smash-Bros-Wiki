@@ -30,6 +30,9 @@ and j_gameID = g_gameID and g_franchID = f_franchID group by c_name order by f_i
 select c_name, f_name from Character, Games, Franchise, joinCandG where c_charID = j_charID
 and j_gameID = g_gameID and g_franchID = f_franchID group by c_name order by f_name;
 
+select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID
+and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "Ike";
+
 -- 6 #get character's moves! (specify by character)
 select c_name, m_ultimate, m_sideSmash, m_bAttack, m_recovery from Character, Moves where m_charID = c_CharID
 and c_name = "Ike";
@@ -107,6 +110,9 @@ where jvu_userID = 3;
 UPDATE User 
 SET userName = "demoUser"
 where u_userID = 5;
+
+
+update Character set c_tier = "A", c_class = "Swordsman" where c_charID = 15;
 
 
 

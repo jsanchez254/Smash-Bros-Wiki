@@ -7,7 +7,7 @@
 .character{
     background-color: #262626;
     width: 200px;
-    height: 100px;
+    height: 100%;
     color: white;
     font-size: 25px;
     border: black 3px solid;
@@ -33,4 +33,34 @@
     background-color: black;
     width: 30px;
     border: inset white 3px;
+}
+
+.franchise{
+    font-size: 40px;
+    font-weight: bold;
+    color: rgba(223, 99, 17, 0.911);
+}
+
+.comment1{
+    background-color: rgba(186, 187, 179, 0.602);
+    border-top-right-radius: 50px; 
+}
+
+.charTitle{
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(8, 0, 10);
+    /* font-family: "Arial Black", Gadget, sans-serif; */
+}
+
+.commBox{
+    border-top-right-radius: 50px;
+    padding-bottom: 10px;
+    border-right: 5px rgb(66, 77, 82) solid;
+    border-left: 4px rgb(149, 149, 138) solid;
+    border-bottom: 8px white solid;
+    border-top: 6px rgb(149, 149, 138) solid;
+    background-color: rgba(234, 236, 223, 0.555);
+    height: 100%;
+    width: 100%;
 }

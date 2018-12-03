@@ -21,10 +21,25 @@ class Ike extends Component {
         like: "",
         letLike: false,
         userName: "",
-        whatLike: true
+        whatLike: true,
+        games: [],
+        franchise: ""
       }
       
       componentDidMount(){
+            axios.get("http://localhost:5000/Ike/getFranchise")
+            .then(res => {
+                const franchise = res.data;
+                this.setState({franchise});
+            })
+
+            axios.get("http://localhost:5000/Ike/getGames")
+            .then(res => {
+                const games = res.data;
+                this.setState({games});
+            })
+
+
             axios.get("http://localhost:5000/logIn")
             .then(res => {
                 const userName = res.data;
@@ -71,6 +86,7 @@ class Ike extends Component {
             })
       }
 
+      //NEW
       HandleLike = () =>{
         setTimeout(() => {
             if(!this.state.letLike){
@@ -120,6 +136,7 @@ class Ike extends Component {
                 console.log(res.data);
             })
     }
+    //UNTIL HERE
 
      //makes sure that user cannot like or dislike something twice
      HandleCheckLikeStatus = (funcion) =>{
@@ -171,10 +188,17 @@ class Ike extends Component {
                                 label = {{basic: true, color: "red", pointing: "left", content: this.state.dislike}}
                                 />
                             </div>
+                            
                         </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h1 className = "title">Franchise:</h1>
+                        <span className = "franchise">{this.state.franchise}</span>
                     </div>
                     <div className = "column is-5 is-offset-1">
-                        <h1 className = "title">Ike</h1>
+                        <h1 className = "charTitle">Ike</h1>
                         <div>
                             {this.state.content}
                         </div>
@@ -202,8 +226,32 @@ class Ike extends Component {
                                 </tr>
                             </tbody>
                         </table>
+                        <h1 className = "title">Game Apparitions:</h1>
+                        <table className = "table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Console</th>
+                                    <th>Release Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        { this.state.games.map((msg, index) => <h1 key = {index}>{msg[0]}</h1> )}  
+                                    </td>                                        
+                                    <td>
+                                        { this.state.games.map((msg, index) => <h1 key = {index}>{msg[1]}</h1> )}   
+                                    </td> 
+                                    <td>
+                                        { this.state.games.map((msg, index) => <h1 key = {index}>{msg[2]}</h1> )}   
+                                    </td>                                      
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <h1 className = "title">Comments</h1>
                 <WriteComment character = "Ike"/>
             </React.Fragment>
           );

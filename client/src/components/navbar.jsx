@@ -63,11 +63,27 @@ class navBar extends Component {
     handleAdminOptions = ()=>{
         if(this.state.isAdmin){
             return(
+            <React.Fragment>
             <Link to = "/createCharacter">
                 <a className = "navbar-item">
-                <Icon name='plus square'  size = "large"/><h1 className = "is-size-6">Add New Character</h1>
+                    <Icon name='plus square'  size = "large"/><h1 className = "is-size-6">Create New Character</h1>
                 </a>
-            </Link>)
+            </Link>
+
+            <Link to = "/updateChar">
+                <a className = "navbar-item">
+                <Icon name='upload'  size = "large"/><h1 className = "is-size-6">Update Character</h1>
+                </a>
+            </Link>
+
+            <Link to = "/DeleteUser">
+                <a className = "navbar-item">
+                <Icon name='user times'  size = "large"/><h1 className = "is-size-6">Delete User</h1>
+                </a>
+            </Link>
+            </React.Fragment>
+            )
+            
         }
     }
 

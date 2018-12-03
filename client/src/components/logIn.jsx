@@ -87,7 +87,7 @@ class logIn extends Component {
                                             <div className = "field">
                                                 <div className = "columns">
                                                         <div className = "column is-5">
-                                                            {/* <Link to = {this.state.linkone}> */}
+                                                            {/* <ink to = {this.state.linkone}> */}
                                                                 <button onClick={this.handleSubmit}   type = "submit" value = "Submit" className = "button is-success">
                                                                     Login
                                                                 </button>

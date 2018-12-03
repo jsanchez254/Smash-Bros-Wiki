@@ -14,7 +14,144 @@ connect = sql.connect("smash.db")
 #control database
 cursor  = connect.cursor()
 
-#create character
+
+#update Character
+@app.route("/updateChar" ,  methods = ["GET", "POST"])
+def updareChar():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check) 
+                parse1 = parse["char"]
+                
+                #char info
+                tier = parse1["tier"]
+                description = parse1["description"]
+                class1 = parse1["class"]
+                name = parse1["character"]
+                
+                #moveSet
+                ultimate =  parse1["move1"]
+                side = parse1["move2"]
+                bAttack = parse1["move3"]
+                recovery = parse1["move4"]
+
+                charID = getCharacterId(name)
+                updateCharacter(charID, tier, description, class1)
+                updateMoves(charID, ultimate, side, bAttack, recovery)
+
+                return "wow"
+        return "cool"
+
+def updateMoves(charID, ultimate, side, bAttack, recovery):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        query = '''UPDATE Moves SET m_ultimate = ''' + '"' + ultimate + '"' + ''',m_sideSmash = ''' + '"' + side + '"' + ''', m_bAttack = ''' + '"' + bAttack +  '"' + ''', m_recovery = ''' + '"' + recovery +  '"' + ''' WHERE m_charID = ''' + str(charID) + ''';'''
+        print query
+        cursor.execute(query)
+        connect.commit() 
+
+def updateCharacter(name, tier, description, class1):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        query = '''UPDATE Character SET c_tier = ''' + "'" + tier + "'" + ''',c_class = ''' + "'" + class1 + "'" + ''', c_desc = ''' + '"' + description +  '"' + ''' WHERE c_charID = ''' + str(name) + ''';'''
+        print query
+        cursor.execute(query)
+        connect.commit() 
+        
+def getCharacterId(character):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        query = '''SELECT c_charID from Character WHERE c_name = ''' +  "'" + character + "'" + ''' ;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0]
+
+
+
+#get users
+@app.route("/getUsers")
+def getUsers():
+        #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select u_userName from User;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+        
+
+#delete Users
+@app.route("/DeleteUser" ,  methods = ["GET", "POST"]  )
+def deleteUser():
+        if request.method == "POST":
+                check = request.data    
+                parse = json.loads(check) 
+                parse1 = parse["user1"]
+                user = parse1["user"]
+
+                userID = getUserID(user)
+                print userID
+
+                deleteAllUser(userID)
+
+                return "cool"
+
+        return "meh"
+
+def getUserID(user):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        query = '''SELECT u_userID FROM User where u_userName = ''' + "'" + user + "'"+ ''';'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        print store
+        return store[0][0] 
+
+def deleteAllUser(userID):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        cursor.execute('''DELETE FROM User WHERE u_userID = ''' + str(userID) + ''';''')
+        connect.commit() 
+
+        cursor.execute('''DELETE FROM commSect WHERE cs_userID = ''' + str(userID) +  ''';''')
+        connect.commit() 
+
+
+#get franchise
+@app.route("/getFranchise")
+def getFranchise():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select f_name from Franchise;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
+#get TimeLine
+@app.route("/getTimeline")
+def getTimeLine():
+          #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = '''select c_name, f_initialRelease from Character, Games, Franchise,
+                 joinCandG where c_charID = j_charID
+                and j_gameID = g_gameID and g_franchID = f_franchID
+                 group by c_name order by f_initialRelease;'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+#create character !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @app.route("/createCharacter",  methods = ["GET", "POST"] )
 def createCharacter():
         if request.method == "POST":
@@ -22,17 +159,77 @@ def createCharacter():
                 parse = json.loads(check) 
                 parse1 = parse["newChar"]
                 
+                #char info
                 tier = parse1["tier"]
                 description = parse1["description"]
                 name = parse1["name"]
                 class1 = parse1["class"]
                 
+                #moveSet
+                ultimate =  parse1["move1"]
+                side = parse1["move2"]
+                bAttack = parse1["move3"]
+                recovery = parse1["move4"]
+
+                #game
+                franchise = parse1["franchise"]
+                game1 = parse1["game1"]
+                date1 = parse1["date1"]
+                console1 = parse1["console1"]
+                game2 = parse1["game2"]
+                date2 = parse1["date2"]
+                console2 = parse1["console2"]
+
                 insertNewCharacter(name, tier, class1, description)
                 charID = getCharacterId(name)
+                insertMoves(charID, ultimate, side, bAttack, recovery)
                 insertLikeSystem (charID)
+
+                franchID = getFranchID(franchise)
+                gameID1 = insertGame(game1, date1, console1, franchID)
+                gameID2 = insertGame(game2, date2, console2, franchID)
+                insertJoinCharGame(charID, gameID1)
+                insertJoinCharGame(charID, gameID2)
+
 
                 return "it works"
         return "cool"
+
+def insertJoinCharGame(charID, gameID):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO joinCandG (j_charID, j_gameID)
+                        VALUES (?,?)''' , (charID, gameID))
+        connect.commit() 
+
+def insertMoves(charID, ultimate, side, bAttack, recovery):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO Moves (m_charID, m_ultimate, m_sideSmash, m_bAttack, m_recovery)
+                        VALUES (?,?,?,?,?)''' , (charID, ultimate, side, bAttack, recovery))
+        connect.commit() 
+
+def getFranchID(franchise):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        query = '''SELECT f_franchID FROM Franchise where f_name = ''' + "'" + franchise + "'"+ ''';'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        print store
+        return store[0][0] 
+
+def insertGame(game1, date1, console1, franchise):
+        connect = sql.connect("smash.db")
+        cursor  = connect.cursor()
+        cursor.execute('''INSERT INTO Games (g_franchID, g_console, g_name,  g_releaseDate)
+                        VALUES (?,?,?,?)''' , (franchise, console1, game1, date1))
+        connect.commit() 
+
+        query = '''SELECT max(g_gameID) FROM Games'''
+        cursor.execute(query)
+        store = cursor.fetchall()
+        return store[0][0] 
+        
 
 def insertNewCharacter(name, tier, class1, description):
         #connect to SMASH database
@@ -44,7 +241,7 @@ def insertNewCharacter(name, tier, class1, description):
         connect.commit()
 
 def getCharacterId(character):
-          #connect to SMASH database
+        #connect to SMASH database
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
@@ -351,6 +548,30 @@ def index():
         store = json.dumps(store)
         return store
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------IKE------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Ike/getGames")
+def getGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Ike"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Ike/getFranchise")
+def getFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Ike"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Ike')
 def ikedesc():
         #connect to SMASH database

@@ -14,6 +14,8 @@ import Timeline from "./components/timeline";
 import Home from "./components/home";
 import CreateAccount from "./components/createAccount";
 import CreateCharacter from "./components/createCharacter";
+import DeleteUser from "./components/deleteUser";
+import UpdateChar from  "./components/updateCharacter";
 
 //IMPORT CHARACTERS
 import Lucina from "./characters/Lucina";
@@ -48,13 +50,15 @@ class App extends Component {
                 <Route path={["/home", "/timeline", "/Lucina",
                  "/Bayonetta", "/Snake", "/Samus", "/Falco", "/Fox", "/Ike",
                  "/Link","/Toon Link", "/Young Link", "/Piranha Plant", "/Mega man",
-                 "/Corrin", "/Cloud", "/Greninja", "/createCharacter" ]} 
+                 "/Corrin", "/Cloud", "/Greninja", "/createCharacter" , "/DeleteUser",  "/updateChar"]} 
                 component = {Navbar}/>
                 <Container>
                   <Route path = "/home" component = {Home}/>
                   <Route path = "/timeline" component = {Timeline}/>
                   <Route path = "/createAccount" component = {CreateAccount}/>
-                  <Route path = "/createCharacter" component = {CreateCharacter}/>                  
+                  <Route path = "/createCharacter" component = {CreateCharacter}/> 
+                  <Route path = "/DeleteUser" component = {DeleteUser}/> 
+                  <Route path = "/updateChar" component = {UpdateChar}/>                   
                   {/*CHARACTER ROUTES*/}
                   <Route path = "/Lucina" component = {Lucina}/>
                   <Route path = "/Bayonetta" component = {Bayonetta}/>

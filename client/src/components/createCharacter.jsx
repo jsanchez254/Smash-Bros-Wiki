@@ -16,7 +16,28 @@ class CreateCharacter extends Component {
         class: ["Heavy", "Projectile", "Melee", "Swordsman"],
         description: "",
         realTier: "",
-        realClass: ""
+        realClass: "",
+        move1: "",
+        move2: "",
+        move3: "",
+        move4: "",
+        franchise: [],
+        realFranchise: "",
+        game1: "",
+        console1: "",
+        date1: "",
+        game2: "",
+        console2: "",
+        date2: ""
+      }
+
+      componentDidMount(){
+          axios.get("http://localhost:5000/getFranchise")
+            .then(res =>{       
+                    const franchise = res.data;
+                    this.setState({franchise});
+                    console.log(this.state.franchise[0]);
+            })
       }
 
       handleChange = (event) =>{
@@ -32,7 +53,18 @@ class CreateCharacter extends Component {
             name : this.state.name,
             tier : this.state.realTier,
             class: this.state.realClass,
-            description: this.state.description
+            description: this.state.description,
+            move1: this.state.move1,
+            move2: this.state.move2,
+            move3: this.state.move3,
+            move4: this.state.move4,
+            franchise: this.state.realFranchise,
+            game1: this.state.game1,
+            console1:this.state.console1,
+            date1: this.state.date1,
+            game2: this.state.game2,
+            console2:this.state.console2,
+            date2: this.state.date2
         }
         axios.post("http://localhost:5000/createCharacter", {newChar})
             .then(res => {
@@ -58,7 +90,7 @@ class CreateCharacter extends Component {
                                                     <div className = "column is-6">
                                                         <label className = "label"> Character Name: </label>
                                                         <div className = "control has-icons-left">
-                                                            <input name = "name" className = "input"
+                                                            <input name = "name" className = "input" 
                                                             onChange = {this.handleChange
                                                             } placeholder = "Enter Name"/>
                                                                 <span className = "icon is-small is-left">
@@ -101,6 +133,138 @@ class CreateCharacter extends Component {
                                                    </div>
                                                     
                                                 </div>
+
+
+                                                <div className = "field ">
+                                                <div className = "columns">
+                                                    <div className = "column is-6">
+                                                        <label className = "label"> Ultimate: </label>
+                                                        <div className = "control has-icons-left">
+                                                            <input name = "move1" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Name"/>
+                                                                <span className = "icon is-small is-left">
+                                                                    <i className="fas fa-envelope"></i>
+                                                                </span>
+                                                        </div>
+                                                        <label className = "label"> Side Smash: </label>
+                                                        <div className = "control has-icons-left">
+                                                            <input name = "move3" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Name"/>
+                                                                <span className = "icon is-small is-left">
+                                                                    <i className="fas fa-envelope"></i>
+                                                                </span>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                    <div className = "column is-6">
+                                                        <label className = "label">B-Attack: </label>
+                                                        <div className = "control has-icons-left">
+                                                            <input name = "move2" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Last Name"/>
+                                                                <span className = "icon is-small is-left">
+                                                                    <i className="fas fa-envelope"></i>
+                                                                </span>
+                                                        </div>
+                                                        <label className = "label"> Recovery: </label>
+                                                        <div className = "control has-icons-left">
+                                                            <input name = "move4" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Name"/>
+                                                                <span className = "icon is-small is-left">
+                                                                    <i className="fas fa-envelope"></i>
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div className="field">
+                                                <label className = "label">Select Franchise:</label>
+                                                        <div className = "select">
+                                                            <select name = "realFranchise" onChange = {this.handleChange}>
+                                                                <option>Select Franchise</option>
+                                                                { this.state.franchise.map((msg, index) => 
+                                                                    <option value = {msg[0]} key = {index}>
+                                                                        {msg[0]}
+                                                                    </option>
+                                                                )}
+                                                            </select>
+                                                    </div>
+                                            </div>
+                                            <div className = "field ">
+                                                <div className = "columns">
+                                                    <div className = "column is-6">
+                                                        <label className = "label"> Game 1: </label>
+                                                        
+                                                            <input name = "game1" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Game"/>
+                                                                
+                                                        
+                                                    </div>
+
+                                                
+                                                    <div className = "column is-3">
+                                                        <label className = "label">Console: </label>
+                                                        
+                                                            <input name = "console1" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Console"/>
+                                                              
+                                                        
+                                                    </div>
+
+                                                    <div className = "column is-3">
+                                                        <label className = "label">Date: </label>
+                                                       
+                                                            <input name = "date1" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "YYYY-MM-DD"/>
+                                                                
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div className = "field ">
+                                                <div className = "columns">
+                                                    <div className = "column is-6">
+                                                        <label className = "label"> Game 2: </label>
+                                                        
+                                                            <input name = "game2" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Game"/>
+                                                                
+                                                        
+                                                    </div>
+
+                                                
+                                                    <div className = "column is-3">
+                                                        <label className = "label">Console: </label>
+                                                        
+                                                            <input name = "console2" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "Enter Console"/>
+                                                              
+                                                        
+                                                    </div>
+
+                                                    <div className = "column is-3">
+                                                        <label className = "label">Date: </label>
+                                                       
+                                                            <input name = "date2" className = "input"
+                                                            onChange = {this.handleChange
+                                                            } placeholder = "YYYY-MM-DD"/>
+                                                                
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
                                             <div className="field">
                                             <label className = "label">Add Description:</label>
@@ -120,7 +284,7 @@ class CreateCharacter extends Component {
                                                     </div>
                                                     </nav>
                                                 </div>
-                                        </article>
+                                            </article>
                                         </div>
                                         </form>
                                     </div>
