@@ -99,7 +99,7 @@ class loadComm extends Component {
         return (  
             <React.Fragment>
                 {this.state.usersComments.map((user, index) => <LoadCommDef key = {index} userName = {user[0]} 
-                    comment = {user[1]}/> )}
+                    comment = {user[1]} main = {user[2]}/> )}
             </React.Fragment>
         );
     }

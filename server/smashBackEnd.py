@@ -660,7 +660,7 @@ def IkeComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Ike";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -755,7 +755,7 @@ def Toon_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Toon Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -850,7 +850,7 @@ def BayonettaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Bayonetta";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -946,7 +946,7 @@ def SnakeComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Snake";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1041,7 +1041,7 @@ def SamusComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Samus";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1136,7 +1136,7 @@ def FalcoComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Falco";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1231,7 +1231,7 @@ def FoxComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Fox";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1326,7 +1326,7 @@ def LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1421,7 +1421,7 @@ def LucinaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Lucina";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1516,7 +1516,7 @@ def Piranha_PlantComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Piranha Plant";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1611,7 +1611,7 @@ def Young_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Young Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1706,7 +1706,7 @@ def Mega_ManComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Mega Man";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1801,7 +1801,7 @@ def GreninjaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Greninja";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1896,7 +1896,7 @@ def CorrinComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Corrin";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1991,7 +1991,7 @@ def CloudComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Cloud";'''
         cursor.execute(query)
         store = cursor.fetchall()
