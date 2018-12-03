@@ -368,6 +368,8 @@ def checkLikeStatus():
                 print charID
                 checko = checkStatus(userID, charID)
         
+                print checko
+
                 return  checko
         return "cool2"
 

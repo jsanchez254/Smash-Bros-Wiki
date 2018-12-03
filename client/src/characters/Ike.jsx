@@ -95,8 +95,9 @@ class Ike extends Component {
                 this.setState({whatLike});
                 this.setState({like}); 
                 this.HandleUpdateOfLikes();
+                console.log("hello like ", this.state.letLike );
             }
-        }, 350);
+        }, 1000);
     }
       
 
@@ -108,8 +109,9 @@ class Ike extends Component {
                 this.setState({whatLike});
                 this.setState({dislike}); 
                 this.HandleUpdateOfLikes();
+                console.log("hello dislike ", this.state.letLike );
             }
-        }, 350);
+        }, 1000);
     }
      
 
@@ -149,6 +151,7 @@ class Ike extends Component {
         .then(res =>{
             const letLike = res.data;
             this.setState({letLike})
+            console.log("Hello", this.state.letLike);
         })
 
         if(funcion == "dislike"){
@@ -156,8 +159,7 @@ class Ike extends Component {
         }
 
         else{
-            this.HandleLike();
-           
+            this.HandleLike();  
         }
 
      }
