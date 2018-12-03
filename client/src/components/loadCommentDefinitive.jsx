@@ -10,7 +10,7 @@ class LoadCommDef extends Component {
                         <div className="content">
                             <p>
                                 <div className = "commBox">
-                                    <strong>{this.props.userName} &nbsp; (Main: {this.props.main})</strong>
+                                    <strong>{this.props.userName} &nbsp; ({this.props.main})</strong>
                                     <br/>
                                         {this.props.comment}
                                     <br/>
