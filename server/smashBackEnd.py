@@ -307,6 +307,9 @@ def updateLikes():
                 userID = getUserId(userName)
                 charID = getCharacterId(character)
 
+                print userID
+                print charID
+
                 insertLike(userID,  charID, like, dislike)
 
                 return "arikado"
@@ -668,7 +671,31 @@ def IkeComments():
         return store
 
 
-#------!!!!!!!!!!!!!!!!!!!!!!!------------------TOON LINK------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Toon_Link------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Toon_Link/getGames")
+def getToon_LinkGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Toon Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Toon_Link/getFranchise")
+def getToon_LinkFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Toon Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Toon_Link')
 def Toon_Linkdesc():
         #connect to SMASH database
@@ -755,7 +782,7 @@ def Toon_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Toon Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -763,7 +790,31 @@ def Toon_LinkComments():
         print store
         return store
 
-#------!!!!!!!!!!!!!!!!!!!!!!!------------------BAYONETTA------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Bayonetta------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Bayonetta/getGames")
+def getBayonettaGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Bayonetta"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Bayonetta/getFranchise")
+def getBayonettaFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Bayonetta"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Bayonetta')
 def Bayonettadesc():
         #connect to SMASH database
@@ -850,7 +901,7 @@ def BayonettaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Bayonetta";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -860,6 +911,31 @@ def BayonettaComments():
 
 
         #------!!!!!!!!!!!!!!!!!!!!!!!------------------SNAKE------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Snake/getGames")
+def getSnakeGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Snake"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Snake/getFranchise")
+def getSnakeFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Snake"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
 @app.route('/Snake')
 def Snakedesc():
         #connect to SMASH database
@@ -954,7 +1030,32 @@ def SnakeComments():
         print store
         return store
 
-        #------!!!!!!!!!!!!!!!!!!!!!!!------------------SAMUS------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Samus------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Samus/getGames")
+def getSamusGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Samus"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Samus/getFranchise")
+def getSamusFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Samus"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        print store
+        return store
+
 @app.route('/Samus')
 def Samusdesc():
         #connect to SMASH database
@@ -1050,6 +1151,30 @@ def SamusComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Falco------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Falco/getGames")
+def getFalcoGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Falco"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Falco/getFranchise")
+def getFalcoFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Falco"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Falco')
 def Falcodesc():
         #connect to SMASH database
@@ -1136,7 +1261,7 @@ def FalcoComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Falco";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1145,6 +1270,30 @@ def FalcoComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Fox------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Fox/getGames")
+def getFoxGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Fox"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Fox/getFranchise")
+def getFoxFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Fox"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Fox')
 def Foxdesc():
         #connect to SMASH database
@@ -1231,7 +1380,7 @@ def FoxComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Fox";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1240,6 +1389,30 @@ def FoxComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Link------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Link/getGames")
+def getLinkGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Link/getFranchise")
+def getLinkFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Link')
 def Linkdesc():
         #connect to SMASH database
@@ -1326,7 +1499,7 @@ def LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1335,6 +1508,30 @@ def LinkComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Lucina------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Lucina/getGames")
+def getLucinaGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Lucina"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Lucina/getFranchise")
+def getLucinaFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Lucina"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Lucina')
 def Lucinadesc():
         #connect to SMASH database
@@ -1421,7 +1618,7 @@ def LucinaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Lucina";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1430,6 +1627,30 @@ def LucinaComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Piranha_Plant------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Piranha_Plant/getGames")
+def getPiranha_PlantGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Piranha Plant"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Piranha_Plant/getFranchise")
+def getPiranha_PlantFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Piranha Plant"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Piranha_Plant')
 def Piranha_Plantdesc():
         #connect to SMASH database
@@ -1516,7 +1737,7 @@ def Piranha_PlantComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Piranha Plant";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1524,7 +1745,31 @@ def Piranha_PlantComments():
         print store
         return store
 
-#------!!!!!!!!!!!!!!!!!!!!!!!------------------Young LINK------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+#------!!!!!!!!!!!!!!!!!!!!!!!------------------Young_Link------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Young_Link/getGames")
+def getYoung_LinkGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Young Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Young_Link/getFranchise")
+def getYoung_LinkFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Young Link"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Young_Link')
 def Young_Linkdesc():
         #connect to SMASH database
@@ -1611,7 +1856,7 @@ def Young_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Young Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1620,6 +1865,30 @@ def Young_LinkComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Mega_Man------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Mega_Man/getGames")
+def getMega_ManGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Mega Man"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Mega_Man/getFranchise")
+def getMega_ManFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Mega Man"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Mega_Man')
 def Mega_Mandesc():
         #connect to SMASH database
@@ -1706,7 +1975,7 @@ def Mega_ManComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Mega Man";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1715,6 +1984,30 @@ def Mega_ManComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Greninja------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Greninja/getGames")
+def getGreninjaGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Greninja"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Greninja/getFranchise")
+def getGreninjaFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Greninja"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Greninja')
 def Greninjadesc():
         #connect to SMASH database
@@ -1801,7 +2094,7 @@ def GreninjaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Greninja";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1810,6 +2103,30 @@ def GreninjaComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Corrin------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Corrin/getGames")
+def getCorrinGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Corrin"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Corrin/getFranchise")
+def getCorrinFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Corrin"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Corrin')
 def Corrindesc():
         #connect to SMASH database
@@ -1896,7 +2213,7 @@ def CorrinComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Corrin";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1905,6 +2222,30 @@ def CorrinComments():
         return store
 
 #------!!!!!!!!!!!!!!!!!!!!!!!------------------Cloud------------------------!!!!!!!!!!!!!!!!!!!!!!!--------------------- 
+@app.route("/Cloud/getGames")
+def getCloudGames():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select g_name, g_console, g_releaseDate from Games, joinCandG, Character where g_gameID = j_gameID and c_charID = j_charID and  c_name = "'"Cloud"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
+@app.route("/Cloud/getFranchise")
+def getCloudFranch():
+         #connect to SMASH database
+        connect = sql.connect("smash.db")
+        #control database
+        cursor  = connect.cursor()
+        query = "select distinct(f_name) from Character, Games, Franchise, joinCandG where c_charID = j_charID and j_gameID = g_gameID and g_franchID = f_franchID and c_name = "'"Cloud"'";"
+        cursor.execute(query)
+        store = cursor.fetchall()
+        store = json.dumps(store)
+        return store
+
 @app.route('/Cloud')
 def Clouddesc():
         #connect to SMASH database
@@ -1991,7 +2332,7 @@ def CloudComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Cloud";'''
         cursor.execute(query)
         store = cursor.fetchall()
