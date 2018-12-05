@@ -319,8 +319,9 @@ def insertLike(userName, character, like, dislike):
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
+        print "HELLO!!!!!!"
         cursor.execute('''INSERT INTO joinVandU (jvu_charID, jvu_userID, jvu_like, jvu_dislike)
-                        VALUES (?,?,?,?)''' , (userName, character, like, dislike))
+                        VALUES (?,?,?,?)''' , (character, userName, like, dislike))
         connect.commit()
 
         # -- WILL BE 1 IN DISLIKE OR 1 IN LIKE, DEPENDING ON ACTION, PYTHON WILL TAKE
@@ -642,6 +643,7 @@ def ikeLike():
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
+        print "LIKES RIGHT HEEERE" ,store 
         return store
 
 @app.route("/Ike/dislike")
@@ -782,7 +784,7 @@ def Toon_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Toon Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -901,7 +903,7 @@ def BayonettaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Bayonetta";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1261,7 +1263,7 @@ def FalcoComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Falco";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1380,7 +1382,7 @@ def FoxComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Fox";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1499,7 +1501,7 @@ def LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1618,7 +1620,7 @@ def LucinaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment , u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Lucina";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1711,8 +1713,7 @@ def Piranha_PlantLike():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select distinct l_like from Character, joinVandU, Voting  where
-                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Piranha Plant";'''
+        query = '''select l_like from Voting where l_charID = 11;'''
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
@@ -1724,8 +1725,7 @@ def Piranha_Plantdislike():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select distinct l_dislike from Character, joinVandU, Voting  where
-                c_charID = jvu_charID and l_charID = jvu_charID and c_name = "Piranha Plant";'''
+        query = '''select l_dislike from Voting where l_charID = 11;'''
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
@@ -1737,7 +1737,7 @@ def Piranha_PlantComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Piranha Plant";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1856,7 +1856,7 @@ def Young_LinkComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Young Link";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -1975,7 +1975,7 @@ def Mega_ManComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect,  Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Mega Man";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -2094,7 +2094,7 @@ def GreninjaComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Greninja";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -2213,7 +2213,7 @@ def CorrinComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Corrin";'''
         cursor.execute(query)
         store = cursor.fetchall()
@@ -2311,6 +2311,7 @@ def CloudLike():
         cursor.execute(query)
         store = cursor.fetchall()
         store = json.dumps(store)
+        print "LIKES RIGHT HEEERE" ,store 
         return store
 
 @app.route("/Cloud/dislike")
@@ -2332,7 +2333,7 @@ def CloudComments():
         connect = sql.connect("smash.db")
         #control database
         cursor  = connect.cursor()
-        query = '''select u_userName, cs_comment from User, commSect, Character where u_userID = cs_userID 
+        query = '''select u_userName, cs_comment, u_main from User, commSect, Character where u_userID = cs_userID 
                  and c_charID = cs_charID and c_name = "Cloud";'''
         cursor.execute(query)
         store = cursor.fetchall()

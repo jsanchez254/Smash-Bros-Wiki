@@ -77,6 +77,7 @@ class Ike extends Component {
                 .then(res => {
                     const like = res.data;
                     this.setState({like});
+                    console.log("LIKE!! ", this.state.like);
                 })
 
             axios.get("http://localhost:5000/Ike/dislike")

@@ -76,12 +76,14 @@ class Cloud extends Component {
             .then(res => {
                 const like = res.data;
                 this.setState({like});
+                console.log(this.state.like);
             })
 
         axios.get("http://localhost:5000/Cloud/dislike")
         .then(res => {
             const dislike = res.data;
             this.setState({dislike});
+            console.log(this.state.dislike);
         })
     }
         
