@@ -132,9 +132,9 @@ class createAccount extends Component {
                                             <div className = "field ">
                                                 <label className = "label"> Password: </label>
                                                     <div className = "control has-icons-left">
-                                                        <input name = "password" className = "input" type = "email"
+                                                        <input name = "password" className = "input" type = "password"
                                                         onChange = {this.handleChange
-                                                        } placeholder = "Enter Email"/>
+                                                        } placeholder = "Enter Password"/>
                                                             <span className = "icon is-small is-left">
                                                                 <i className="fas fa-envelope"></i>
                                                             </span>
