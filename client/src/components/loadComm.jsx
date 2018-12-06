@@ -22,6 +22,7 @@ class loadComm extends Component {
                 const usersComments = res.data;
                 console.log(usersComments);
                 this.setState({usersComments});
+                console.log("please ", this.state.usersComments.length);
             })
         else if(this.props.character == "Bayonetta")
         axios.get("http://localhost:5000/Bayonetta/comments")
@@ -98,7 +99,7 @@ class loadComm extends Component {
     render() { 
         return (  
             <React.Fragment>
-                {this.state.usersComments.map((user, index) => <LoadCommDef key = {index} userName = {user[0]} 
+                {this.state.usersComments.slice(0).reverse().map((user, index) => <LoadCommDef key = {index} userName = {user[0]} 
                     comment = {user[1]} main = {user[2]}/> )}
             </React.Fragment>
         );

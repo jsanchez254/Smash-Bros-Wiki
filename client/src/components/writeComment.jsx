@@ -4,6 +4,8 @@ import axios from "axios";
 import LoadComm from "./loadComm"
 import { Divider } from 'semantic-ui-react'
 
+import {reloadp} from "../assets/js/reload";
+
 class writeComment extends Component {
     state = { 
         comment: "",
@@ -36,10 +38,16 @@ class writeComment extends Component {
           
         })
         console.log(blog.comment);
+        setTimeout(()=>{
+             console.log("come ON!")
+            reloadp();
+        }, 300);
+        
     }
 
     loadComments(){
         console.log(this.props.character)
+        this.setState
         return (<LoadComm character = {this.props.character}/>);
     }
 
