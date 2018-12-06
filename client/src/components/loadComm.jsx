@@ -94,6 +94,35 @@ class loadComm extends Component {
                 this.setState({usersComments});
             })
 
+        else if(this.props.character == "Corrin")
+        axios.get("http://localhost:5000/Corrin/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
+        else if(this.props.character == "Mega Man")
+        axios.get("http://localhost:5000/Mega_Man/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
+        else if(this.props.character == "Greninja")
+        axios.get("http://localhost:5000/Greninja/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
+        else if(this.props.character == "Cloud")
+        axios.get("http://localhost:5000/Cloud/comments")
+            .then(res => {
+                const usersComments = res.data;
+                console.log(usersComments);
+                this.setState({usersComments});
+            })
+
       }
 
     render() { 

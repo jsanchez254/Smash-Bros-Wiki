@@ -41,7 +41,7 @@ class writeComment extends Component {
         setTimeout(()=>{
              console.log("come ON!")
             reloadp();
-        }, 300);
+        }, 800);
         
     }
 
